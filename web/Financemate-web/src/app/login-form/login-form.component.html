@@ -1,0 +1,46 @@
+<form [formGroup]="loginForm" (ngSubmit)="onsubmit()">
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>LOGIN</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            formControlName="email"
+            required
+          />
+
+          @if (loginForm.controls["email"].invalid) {
+            <mat-error><p>here comes your error message</p></mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide() ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="togglePasswordVisibility($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+          >
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+
+  </mat-card-content>
+  <mat-card-footer class="example-card-footer">
+    <button mat-flat-button type="submit">Login</button>
+  </mat-card-footer>
+</mat-card>
+</form>

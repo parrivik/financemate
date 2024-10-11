@@ -3,11 +3,13 @@ package ch.parrino.financemate.controllers;
 import ch.parrino.financemate.database.entities.UserAccount;
 import ch.parrino.financemate.model.UserAccountModel;
 import ch.parrino.financemate.services.UserAccountService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/UserAccount")
+@SecurityRequirement(name = "bearerAuth")
 public class UserAccountController {
     @Autowired
     private UserAccountService userAccountService;

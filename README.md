@@ -1,7 +1,7 @@
 # financemate
-# financemate
-# financemate
-# financemate
-# financemate
-# financemate
-# financemate
+
+
+main is gradle
+
+
+master is angular

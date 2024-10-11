@@ -4,10 +4,13 @@ package ch.parrino.financemate.controllers;
 import ch.parrino.financemate.database.entities.UserAccount;
 import ch.parrino.financemate.model.JwtDto;
 import ch.parrino.financemate.model.SignInDto;
+import ch.parrino.financemate.model.SingUpDto;
 import ch.parrino.financemate.security.TokenProvider;
 import ch.parrino.financemate.services.AuthService;
+import ch.parrino.financemate.services.InvalidJwtException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 // controllers/AuthController.java
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -36,4 +39,12 @@ public class AuthController {
         var accessToken = tokenService.generateAccessToken((UserAccount) authUser.getPrincipal());
         return ResponseEntity.ok(new JwtDto(accessToken));
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signUp(@RequestBody @Valid SingUpDto data) throws InvalidJwtException {
+        service.signUp(data);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
 }
